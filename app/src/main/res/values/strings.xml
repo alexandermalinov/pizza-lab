@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">pizza lab</string>
+
+    <string name="pizza_lab">Pizza Lab</string>
+
+    <!-- Common -->
+    <string name="ok">Okay</string>
+    <string name="cancel">Cancel</string>
+    <string name="recent_chats">Recent Chats</string>
+
+    <!-- Api Response Errors -->
+    <string name="error_something_went_wrong">Something went wrong</string>
+    <string name="error_network">Please check your network connection</string>
+
+    // Bottom Navigation Menu Titles
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="order">Order</string>
+
+    <!-- Sign Up Screen -->
+    <string name="your_personal_data">Your Personal Data</string>
+    <string name="your_profile">Your Profile</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="enter_username">Enter username</string>
+    <string name="create_account">Create Account</string>
+
+    <!-- Sign In Screen -->
+    <string name="enter_email">Enter email</string>
+    <string name="enter_password">Enter password</string>
+    <string name="continue_text">Continue</string>
+
+    <!-- Input errors -->
+    <string name="invalid_email">Invalid email</string>
+    <string name="invalid_username">Username must contain at least 2 symbols</string>
+    <string name="invalid_password">A password must contain at least 8 symbols</string>
+    <string name="invalid_confirm_password">Passwords must match</string>
+</resources>
