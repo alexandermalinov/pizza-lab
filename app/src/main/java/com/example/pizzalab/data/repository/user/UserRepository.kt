@@ -19,9 +19,15 @@ class UserRepository @Inject constructor(private val local: UserLocalSource) {
             block: suspend (Either<LocalDatabaseError, ResponseResultOk>) -> Unit
         )
 
+        suspend fun loginUser(
+            email: String,
+            password: String,
+            block: suspend (Either<LocalDatabaseError, ResponseResultOk>) -> Unit
+        )
+
         suspend fun setIsSignedIn(isSignedIn: Boolean)
 
-        suspend fun isSignedIn(): Boolean
+        suspend fun isSignedIn(block: (Either<DatabaseError, ResponseResultOk>) -> Unit)
     }
 
     suspend fun registerUser(
@@ -31,9 +37,18 @@ class UserRepository @Inject constructor(private val local: UserLocalSource) {
         local.registerUser(user, block)
     }
 
+    suspend fun loginUser(
+        email: String,
+        password: String,
+        block: suspend (Either<LocalDatabaseError, ResponseResultOk>) -> Unit
+    ) {
+        local.loginUser(email, password, block)
+    }
+
     suspend fun setIsSignedIn(isSignedIn: Boolean) {
         local.setIsSignedIn(isSignedIn)
     }
 
-    suspend fun isSignedIn() = local.isSignedIn()
+    suspend fun isSignedIn(block: (Either<DatabaseError, ResponseResultOk>) -> Unit) =
+        local.isSignedIn(block)
 }

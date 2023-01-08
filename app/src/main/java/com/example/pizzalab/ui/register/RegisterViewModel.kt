@@ -15,7 +15,6 @@ import com.example.pizzalab.utils.common.INVALID_RES
 import com.example.pizzalab.vo.register.RegisterUiModel
 import com.example.pizzalab.vo.register.toUser
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -66,16 +65,18 @@ class RegisterViewModel @Inject constructor(
      * Override
     ---------------------------------------------------------------------------------------------*/
     override fun onContinueClick() {
-        viewModelScope.launch(Dispatchers.IO) {
-            _uiState.value?.let {
-                userRepository.registerUser(
-                    RegisterUiModel(email = it.email, password = it.password).toUser()
-                ) { either ->
+        viewModelScope.launch {
+            _uiState.value?.apply {
+                isLoading = true
+                val model = RegisterUiModel(email = email, password = password).toUser()
+
+                userRepository.registerUser(model) { either ->
                     either.foldSuspend({ error ->
-                        Timber.e("Error registering user in local database e: ${error.errorMessage}")
+                        Timber.e("Error while registering user. e: ${error.errorMessage}")
                         // TODO - visualize the error
                     }, {
                         userRepository.setIsSignedIn(true)
+                        isLoading = false
                         _navigationLiveData.value =
                             NavigationGraph(R.id.action_registerFragment_to_homeFragment)
                     })
@@ -124,6 +125,10 @@ class RegisterViewModel @Inject constructor(
             setIsConfirmPasswordValid(confirmPassword.toString())
             setIsPasswordValid(_uiState.value?.password ?: EMPTY)
         }
+    }
+
+    override fun onLoginClick() {
+        _navigationLiveData.value = NavigationGraph(R.id.action_registerFragment_to_loginFragment)
     }
 
     companion object {

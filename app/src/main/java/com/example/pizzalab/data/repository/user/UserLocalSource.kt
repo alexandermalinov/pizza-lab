@@ -26,9 +26,27 @@ class UserLocalSource @Inject constructor(
         }
     }
 
+    override suspend fun loginUser(
+        email: String,
+        password: String,
+        block: suspend (Either<LocalDatabaseError, ResponseResultOk>) -> Unit
+    ) {
+        if (userDao.getUser(email, password) != null) {
+            block.invoke(Either.right(ResponseResultOk))
+        } else {
+            block.invoke(Either.left(LocalDatabaseError(errorMessage = "User not found")))
+        }
+    }
+
     override suspend fun setIsSignedIn(isSignedIn: Boolean) {
         SharedPrefProvider.setIsUserSignedIn(context, isSignedIn)
     }
 
-    override suspend fun isSignedIn(): Boolean = SharedPrefProvider.getIsUserSignedIn(context)
+    override suspend fun isSignedIn(block: (Either<DatabaseError, ResponseResultOk>) -> Unit) {
+        if (SharedPrefProvider.getIsUserSignedIn(context)) {
+            block.invoke(Either.right(ResponseResultOk))
+        } else {
+            block.invoke(Either.left(LocalDatabaseError(errorMessage = "User not found")))
+        }
+    }
 }

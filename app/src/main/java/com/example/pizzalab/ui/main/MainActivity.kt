@@ -9,6 +9,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
 import com.example.pizzalab.R
 import com.example.pizzalab.databinding.ActivityMainBinding
+import com.google.android.material.badge.BadgeDrawable
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -59,5 +60,10 @@ class MainActivity : AppCompatActivity() {
                 navigationController,
                 dataBinding.bottomNavigationMenu
             )
+
+        val badge: BadgeDrawable = dataBinding.bottomNavigationMenu
+            .getOrCreateBadge(R.id.orderFragment)
+        badge.number = 3
+        badge.isVisible = true
     }
 }

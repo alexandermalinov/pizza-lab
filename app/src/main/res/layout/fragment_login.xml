@@ -1,12 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <data>
+
+        <variable
+            name="model"
+            type="com.example.pizzalab.vo.login.LoginUiModel" />
+
+        <variable
+            name="presenter"
+            type="com.example.pizzalab.ui.login.LoginPresenter" />
+
+    </data>
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:orientation="vertical">
+        android:fillViewport="true">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/padding_medium">
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            <TextView
+                android:id="@+id/text_welcome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginHorizontal="@dimen/margin_xx_medium"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:fontFamily="@font/core_sans_regular"
+                android:gravity="start"
+                android:text="@string/login"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_xx_medium"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edittext_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_welcome"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginHorizontal="@dimen/margin_xx_medium"
+                android:layout_marginTop="@dimen/margin_large"
+                android:hint="@string/enter_email"
+                app:boxBackgroundColor="@color/white"
+                app:endIconDrawable="@{model.emailEndIcon}"
+                app:endIconMode="custom"
+                app:endIconTint="@color/apple"
+                app:errorEnabled="@{model.emailErrorEnabled}"
+                app:inputError="@{model.emailError}">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:text="@={model.email}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edittext_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edittext_email"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginHorizontal="@dimen/margin_xx_medium"
+                android:layout_marginTop="@dimen/margin_small"
+                android:hint="@string/enter_password"
+                app:boxBackgroundColor="@color/white"
+                app:errorEnabled="@{model.passwordErrorEnabled}"
+                app:errorIconDrawable="@null"
+                app:inputError="@{model.passwordError}"
+                app:passwordToggleEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:text="@={model.password}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_above="@+id/container_dont_have_account"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="@dimen/margin_xx_medium"
+                android:layout_marginTop="@dimen/margin_xx_medium"
+                android:layout_marginEnd="@dimen/margin_xx_medium"
+                android:onClick="@{() -> presenter.onContinueClick()}"
+                android:paddingVertical="@dimen/padding_x_small"
+                android:text="@string/continue_text"
+                app:cornerRadius="@dimen/radius_large" />
+
+            <ProgressBar
+                android:id="@+id/loading_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginBottom="@dimen/margin_xx_medium"
+                app:visibleGone="@{model.loading}" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/container_dont_have_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginBottom="@dimen/margin_xx_medium"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/text_already_have_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dont_have_account_yet"
+                    android:onClick="@{() -> presenter.onRegisterClick()}"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/text_sign_up"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_tiny"
+                    android:onClick="@{() -> presenter.onRegisterClick()}"
+                    android:text="@string/register"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
 </layout>

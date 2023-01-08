@@ -12,9 +12,13 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="grey">#C88C8C8C</color>
+
     <color name="seashell">#fff2ec</color>
     <color name="indian_red">#d55561</color>
 
     <color name="apple">#4CAF50</color>
+
+    <color name="light_gray">#DFE6E0</color>
 
 </resources>

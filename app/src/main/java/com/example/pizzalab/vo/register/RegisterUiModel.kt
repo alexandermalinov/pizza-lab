@@ -10,10 +10,10 @@ import java.util.UUID
 
 data class RegisterUiModel(
     val id: String = UUID.randomUUID().toString(),
-    var email: String = EMPTY,
-    var password: String = EMPTY,
-    var confirmPassword: String = EMPTY,
-    val isLoading: Boolean = false
+    var email: String = EMPTY, // two way data binding
+    var password: String = EMPTY, // two way data binding
+    var confirmPassword: String = EMPTY, // two way data binding
+    var isLoading: Boolean = false // two way data binding
 ) : BaseObservable() {
 
     @get:Bindable

@@ -13,4 +13,6 @@ interface RegisterPresenter {
     fun onPasswordTextChanged(textFlow: Flow<CharSequence>)
 
     fun onConfirmPasswordTextChanged(textFlow: Flow<CharSequence>)
+
+    fun onLoginClick()
 }

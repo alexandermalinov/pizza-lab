@@ -7,6 +7,10 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "pizza")
 data class Pizza(
     @PrimaryKey
-    @ColumnInfo(name = "user_id")
-    val id: String
+    @ColumnInfo(name = "pizza_id")
+    val id: String,
+    @ColumnInfo(name = "price")
+    var price: String,
+    @ColumnInfo(name = "size")
+    val size: String
 )

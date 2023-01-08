@@ -16,7 +16,7 @@ const val SELECT_IMAGE_KEY = "image_picker_key"
 const val IMAGE_TYPE = "image/*"
 
 // Delays
-const val SPLASH_SCREEN_DELAY = 1000L
+const val SPLASH_SCREEN_DELAY = 1500L
 
 // Shared Preferences Keys
 const val USER_SHARED_PREFS_KEY = "user_shared_prefs"

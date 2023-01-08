@@ -44,7 +44,7 @@
             android:layout_marginTop="@dimen/margin_huge"
             android:textColor="@color/white"
             android:textSize="@dimen/text_large"
-            android:fontFamily="@font/core_sans_regular"
+            android:fontFamily="@font/rozanova_thin"
             android:text="@string/pizza_lab"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -8,9 +8,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.example.pizzalab.R
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -30,14 +32,14 @@ fun TextInputLayout.setError(@StringRes error: Int) {
 
 @BindingAdapter("glideRes", "defaultGlideRes")
 fun View.setGlideRes(
-    glideRes: String?,
-    @DrawableRes defaultGlideRes: Int
+    glideRes: Int?,
+    defaultGlideRes: Int
 ) {
+    val image = glideRes?.let { AppCompatResources.getDrawable(context, it) }
     Glide.with(this)
-        .load(glideRes)
+        .load(image)
         .error(defaultGlideRes)
-        .placeholder(defaultGlideRes)
-        .let { drawable -> if (!glideRes.isNullOrBlank()) drawable.centerCrop() else drawable }
+        .placeholder(defaultGlideRes).centerCrop()
         .into(this as ImageView)
 }
 
@@ -79,4 +81,9 @@ fun TextView.setTextBold(shouldBoldText: Boolean) {
 @BindingAdapter("textChanges")
 fun EditText.setTextChange(callback: TextChangesCallback) {
     callback.textChanges(textChanges())
+}
+
+@BindingAdapter("textPrice")
+fun TextView.setTextPrice(price: String) {
+    text = resources.getString(R.string.pizza_price, price)
 }

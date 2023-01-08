@@ -21,6 +21,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     ---------------------------------------------------------------------------------------------*/
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initUi()
+        observeLiveData()
         observeNavigation(viewModel.navigationLiveData)
     }
 
@@ -29,4 +31,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     /* --------------------------------------------------------------------------------------------
      * Private
     ---------------------------------------------------------------------------------------------*/
+    private fun initUi() {
+        dataBinding.presenter = viewModel
+    }
+
+    private fun observeLiveData() {
+        viewModel.uiState.observe(viewLifecycleOwner) { uiModel ->
+            dataBinding.model = uiModel
+        }
+    }
 }

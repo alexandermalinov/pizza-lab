@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.example.pizzalab.vo.createpizza.IngredientUiModel" />
+
+        <variable
+            name="presenter"
+            type="com.example.pizzalab.ui.ingredient.IngredientPresenter" />
+
+        <import type="com.example.pizzalab.R" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> presenter.onIngredientClick(model.name, model.type)}"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_marginEnd="@dimen/margin_small"
+        android:background="@drawable/sp_rectangle_light_blue"
+        android:padding="@dimen/padding_x_small">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            app:defaultGlideRes="@{R.drawable.ic_basil}"
+            app:glideRes="@{model.image}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_tomato" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="25dp"
+            android:layout_height="28dp"
+            android:src="@drawable/ic_checkbox"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibleGone="@{model.selected}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

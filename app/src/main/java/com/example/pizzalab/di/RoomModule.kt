@@ -3,6 +3,7 @@ package com.example.pizzalab.di
 import android.app.Application
 import androidx.room.Room
 import com.example.pizzalab.data.local.RoomDatabase
+import com.example.pizzalab.data.local.dao.PizzaIngredientRelationDao
 import com.example.pizzalab.data.local.dao.UserDao
 import com.example.pizzalab.utils.common.DATABASE_NAME
 import dagger.Module
@@ -27,4 +28,9 @@ object RoomModule {
     @Singleton
     @Provides
     fun provideUserDao(database: RoomDatabase): UserDao = database.getUserDao()
+
+    @Singleton
+    @Provides
+    fun providePizzaIngredientDao(database: RoomDatabase): PizzaIngredientRelationDao =
+        database.getPizzaIngredientCrossRefDao()
 }

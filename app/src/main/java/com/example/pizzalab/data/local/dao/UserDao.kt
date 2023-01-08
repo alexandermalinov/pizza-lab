@@ -12,6 +12,6 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveUser(user: User): Long
 
-    @Query("SELECT * FROM user WHERE user_id == :userId")
-    suspend fun getUserById(userId: String): User
+    @Query("SELECT * FROM user WHERE user_email == :email AND user_password == :password")
+    suspend fun getUser(email: String, password: String): User?
 }
