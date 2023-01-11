@@ -5,11 +5,8 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pizzalab.R
-import com.example.pizzalab.databinding.FragmentHomeBinding
 import com.example.pizzalab.databinding.FragmentPurchaseBinding
 import com.example.pizzalab.ui.base.BaseFragment
-import com.example.pizzalab.ui.home.HomeViewModel
-import com.example.pizzalab.ui.home.PizzaAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,15 +15,15 @@ class PurchaseFragment : BaseFragment<FragmentPurchaseBinding>() {
     /* --------------------------------------------------------------------------------------------
      * Properties
     ---------------------------------------------------------------------------------------------*/
-    private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: PurchaseViewModel by viewModels()
 
     /* --------------------------------------------------------------------------------------------
      * Override
     ---------------------------------------------------------------------------------------------*/
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //initPizzaRecyclerView()
-        //observeLiveData()
+        initPizzaRecyclerView()
+        observeLiveData()
     }
 
     override fun getLayoutId(): Int = R.layout.fragment_purchase
@@ -34,10 +31,10 @@ class PurchaseFragment : BaseFragment<FragmentPurchaseBinding>() {
     /* --------------------------------------------------------------------------------------------
      * Private
     ---------------------------------------------------------------------------------------------*/
-   /* private fun initPizzaRecyclerView() {
+    private fun initPizzaRecyclerView() {
         dataBinding.recyclerViewPizzas.apply {
-            adapter = PizzaAdapter()
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = PizzaOrderAdapter(viewModel)
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         }
     }
 
@@ -48,10 +45,10 @@ class PurchaseFragment : BaseFragment<FragmentPurchaseBinding>() {
     }
 
     private fun observeUiLiveData() {
-        viewModel.uiState.observe(viewLifecycleOwner) { uiModel ->
+        viewModel.pizzasInBag.observe(viewLifecycleOwner) { uiModel ->
             dataBinding.model = uiModel
-            (dataBinding.recyclerViewPizzas.adapter as PizzaAdapter)
+            (dataBinding.recyclerViewPizzas.adapter as PizzaOrderAdapter)
                 .submitList(uiModel.pizzas)
         }
-    }*/
+    }
 }

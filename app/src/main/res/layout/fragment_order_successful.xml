@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="presenter"
+            type="com.example.pizzalab.ui.order_successful.OrderSuccessfulPresenter" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="@dimen/margin_medium">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="250dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="@dimen/margin_x_large"
+            android:src="@drawable/ic_order_successful"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_order_placed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_x_large"
+            android:text="@string/thank_you"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_xx_medium"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+        <TextView
+            android:id="@+id/text_order_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_x_small"
+            android:text="@string/order_successful_description"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_order_placed" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_go_to_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_x_large"
+            android:drawableEnd="@drawable/ic_arrow_right"
+            android:drawableTint="@color/white"
+            android:fontFamily="@font/core_sans_regular"
+            android:onClick="@{() -> presenter.backToHome()}"
+            android:paddingHorizontal="@dimen/padding_x_large"
+            android:text="@string/back_to_home"
+            android:textAllCaps="false"
+            android:textSize="@dimen/text_medium"
+            app:cornerRadius="@dimen/radius_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_order_description" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

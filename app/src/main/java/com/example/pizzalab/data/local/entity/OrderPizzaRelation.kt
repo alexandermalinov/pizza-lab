@@ -8,7 +8,7 @@ import androidx.room.*
 )
 data class OrderPizzaCrossRef(
     @ColumnInfo(name = "order_id")
-    val orderId: Long,
+    val orderId: String,
     @ColumnInfo(name = "pizza_id")
     val pizzaId: String
 )
@@ -20,9 +20,7 @@ data class OrderWithPizzas(
         parentColumn = "order_id",
         entity = Pizza::class,
         entityColumn = "pizza_id",
-        associateBy = Junction(
-            OrderPizzaCrossRef::class
-        )
+        associateBy = Junction(OrderPizzaCrossRef::class)
     )
     val pizzas: List<Pizza>
 )

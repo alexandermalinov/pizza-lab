@@ -2,18 +2,27 @@ package com.example.pizzalab.ui.createpizza
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.pizzalab.R
+import com.example.pizzalab.data.repository.pizza.PizzaRepository
+import com.example.pizzalab.navigation.NavigationGraph
 import com.example.pizzalab.ui.base.BaseViewModel
 import com.example.pizzalab.ui.ingredient.IngredientPresenter
 import com.example.pizzalab.ui.ingredient.IngredientType
+import com.example.pizzalab.utils.common.EMPTY
 import com.example.pizzalab.vo.createpizza.CreatePizzaUiModel
 import com.example.pizzalab.vo.createpizza.IngredientUiModel
 import com.example.pizzalab.vo.createpizza.PizzaUiModel
+import com.example.pizzalab.vo.createpizza.toIngredients
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
-class CreatePizzaViewModel @Inject constructor() : BaseViewModel(), CreatePizzaPresenter,
+class CreatePizzaViewModel @Inject constructor(
+    private val pizzaRepository: PizzaRepository
+) : BaseViewModel(), CreatePizzaPresenter,
     IngredientPresenter {
 
     /* --------------------------------------------------------------------------------------------
@@ -30,51 +39,131 @@ class CreatePizzaViewModel @Inject constructor() : BaseViewModel(), CreatePizzaP
 
     init {
         val meats = listOf(
-            IngredientUiModel(R.drawable.bacon, "Bacon", type = IngredientType.MEAT),
-            IngredientUiModel(R.drawable.peperoni, "Peperoni", type = IngredientType.MEAT),
-            IngredientUiModel(R.drawable.chorizo, "Chorizo", type = IngredientType.MEAT),
-            IngredientUiModel(R.drawable.ham, "Ham", type = IngredientType.MEAT),
-            IngredientUiModel(R.drawable.tuna_fish, "Tuna Fish", type = IngredientType.MEAT),
-            IngredientUiModel(R.drawable.chicken, "Chicken", type = IngredientType.MEAT)
+            IngredientUiModel(image = R.drawable.bacon, name = "Bacon", type = IngredientType.MEAT),
+            IngredientUiModel(
+                image = R.drawable.peperoni,
+                name = "Peperoni",
+                type = IngredientType.MEAT
+            ),
+            IngredientUiModel(
+                image = R.drawable.chorizo,
+                name = "Chorizo",
+                type = IngredientType.MEAT
+            ),
+            IngredientUiModel(image = R.drawable.ham, name = "Ham", type = IngredientType.MEAT),
+            IngredientUiModel(
+                image = R.drawable.tuna_fish,
+                name = "Tuna Fish",
+                type = IngredientType.MEAT
+            ),
+            IngredientUiModel(
+                image = R.drawable.chicken,
+                name = "Chicken",
+                type = IngredientType.MEAT
+            )
         )
         val vegetables = listOf(
-            IngredientUiModel(R.drawable.ic_tomato, "Tomato", type = IngredientType.VEGETABLE),
             IngredientUiModel(
-                R.drawable.ic_pepper,
-                "Green Pepper",
+                image = R.drawable.ic_tomato,
+                name = "Tomato",
                 type = IngredientType.VEGETABLE
             ),
             IngredientUiModel(
-                R.drawable.ic_mushrooms,
-                "Mushrooms",
+                image = R.drawable.ic_pepper,
+                name = "Green Pepper",
                 type = IngredientType.VEGETABLE
             ),
-            IngredientUiModel(R.drawable.ic_jalapeno, "Jalapeno", type = IngredientType.VEGETABLE),
-            IngredientUiModel(R.drawable.ic_olives, "Olives", type = IngredientType.VEGETABLE),
-            IngredientUiModel(R.drawable.ic_onion, "Onion", type = IngredientType.VEGETABLE),
-            IngredientUiModel(R.drawable.ic_pickles, "Pickles", type = IngredientType.VEGETABLE),
             IngredientUiModel(
-                R.drawable.ic_pineapple,
-                "Pineapple",
+                image = R.drawable.ic_mushrooms,
+                name = "Mushrooms",
                 type = IngredientType.VEGETABLE
             ),
-            IngredientUiModel(R.drawable.ic_corn, "Corn", type = IngredientType.VEGETABLE)
+            IngredientUiModel(
+                image = R.drawable.ic_jalapeno,
+                name = "Jalapeno",
+                type = IngredientType.VEGETABLE
+            ),
+            IngredientUiModel(
+                image = R.drawable.ic_olives,
+                name = "Olives",
+                type = IngredientType.VEGETABLE
+            ),
+            IngredientUiModel(
+                image = R.drawable.ic_onion,
+                name = "Onion",
+                type = IngredientType.VEGETABLE
+            ),
+            IngredientUiModel(
+                image = R.drawable.ic_pickles,
+                name = "Pickles",
+                type = IngredientType.VEGETABLE
+            ),
+            IngredientUiModel(
+                image = R.drawable.ic_pineapple,
+                name = "Pineapple",
+                type = IngredientType.VEGETABLE
+            ),
+            IngredientUiModel(
+                image = R.drawable.ic_corn,
+                name = "Corn",
+                type = IngredientType.VEGETABLE
+            )
         )
         val cheeses = listOf(
-            IngredientUiModel(R.drawable.ic_cheese, "Mozzarella", type = IngredientType.CHEESE),
-            IngredientUiModel(R.drawable.ic_cheese, "Cheddar", type = IngredientType.CHEESE),
-            IngredientUiModel(R.drawable.ic_cheese, "Parmesan", type = IngredientType.CHEESE),
-            IngredientUiModel(R.drawable.ic_cheese, "Melted Cheese", type = IngredientType.CHEESE),
-            IngredientUiModel(R.drawable.ic_cheese, "Emmental", type = IngredientType.CHEESE)
+            IngredientUiModel(
+                image = R.drawable.ic_cheese,
+                name = "Mozzarella",
+                type = IngredientType.CHEESE
+            ),
+            IngredientUiModel(
+                image = R.drawable.ic_cheese,
+                name = "Cheddar",
+                type = IngredientType.CHEESE
+            ),
+            IngredientUiModel(
+                image = R.drawable.ic_cheese,
+                name = "Parmesan",
+                type = IngredientType.CHEESE
+            ),
+            IngredientUiModel(
+                image = R.drawable.ic_cheese,
+                name = "Melted Cheese",
+                type = IngredientType.CHEESE
+            ),
+            IngredientUiModel(
+                image = R.drawable.ic_cheese,
+                name = "Emmental",
+                type = IngredientType.CHEESE
+            )
         )
         val sauces = listOf(
-            IngredientUiModel(R.drawable.ic_sauce, "Barbeque Sauce", type = IngredientType.SAUCE),
-            IngredientUiModel(R.drawable.ic_sauce, "Tomato Sauce", type = IngredientType.SAUCE),
-            IngredientUiModel(R.drawable.ic_sauce, "Cream", type = IngredientType.SAUCE)
+            IngredientUiModel(
+                image = R.drawable.ic_sauce,
+                name = "Barbeque Sauce",
+                type = IngredientType.SAUCE
+            ),
+            IngredientUiModel(
+                image = R.drawable.ic_sauce,
+                name = "Tomato Sauce",
+                type = IngredientType.SAUCE
+            ),
+            IngredientUiModel(
+                image = R.drawable.ic_sauce,
+                name = "Cream",
+                type = IngredientType.SAUCE
+            )
         )
         val spices = listOf(
-            IngredientUiModel(R.drawable.ic_basil, "Basil", type = IngredientType.SPICE),
-            IngredientUiModel(R.drawable.oregano, "Basil", type = IngredientType.SPICE)
+            IngredientUiModel(
+                image = R.drawable.ic_basil,
+                name = "Basil",
+                type = IngredientType.SPICE
+            ),
+            IngredientUiModel(
+                image = R.drawable.oregano,
+                name = "Basil",
+                type = IngredientType.SPICE
+            )
         )
         _uiState.value = CreatePizzaUiModel(
             meats = meats,
@@ -128,7 +217,20 @@ class CreatePizzaViewModel @Inject constructor() : BaseViewModel(), CreatePizzaP
     }
 
     override fun onPurchaseClick() {
-
+        viewModelScope.launch {
+            _pizzaUiState.value?.apply {
+                pizzaRepository.savePizza(
+                    id = UUID.randomUUID().toString(),
+                    title = EMPTY,
+                    description = EMPTY,
+                    price = price,
+                    size = size,
+                    ingredientsIds = ingredients.toIngredients()
+                )
+            }
+            _navigationLiveData.value =
+                NavigationGraph(R.id.action_createPizzaFragment_to_homeFragment)
+        }
     }
 
     /* --------------------------------------------------------------------------------------------
@@ -142,9 +244,20 @@ class CreatePizzaViewModel @Inject constructor() : BaseViewModel(), CreatePizzaP
             if (ingredient.name == name) {
                 ingredient.isSelected = ingredient.isSelected.not()
                 addOrRemovePrice(ingredient.isSelected, INGREDIENT_PRICE)
+                addOrRemoveIngredient(ingredient)
             }
         }
         return ingredients ?: emptyList()
+    }
+
+    private fun addOrRemoveIngredient(ingredient: IngredientUiModel) {
+        _pizzaUiState.value?.apply {
+            _pizzaUiState.value = if (ingredient.isSelected) {
+                copy(ingredients = ingredients.plus(ingredient))
+            } else {
+                copy(ingredients = ingredients.minus(ingredient))
+            }
+        }
     }
 
     private fun addOrRemovePrice(shouldAdd: Boolean, value: Double) {

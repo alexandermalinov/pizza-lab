@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.example.pizzalab.vo.pizzadetails.PizzaDetailsUiModel" />
+
+        <variable
+            name="presenter"
+            type="com.example.pizzalab.ui.pizzadetails.PizzaDetailsPresenter" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="@dimen/margin_medium"
+        android:layout_marginTop="@dimen/margin_medium">
+
+        <CheckBox
+            android:id="@+id/icon_navigate_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/ic_arrow_left"
+            android:onClick="@{() -> presenter.navigateBackClick()}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/image_pizza"
+            android:layout_width="match_parent"
+            android:layout_height="172dp"
+            android:src="@drawable/pizza_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/icon_navigate_back" />
+
+        <TextView
+            android:id="@+id/text_screen_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_xx_medium"
+            android:fontFamily="@font/rozanova_semi_bold"
+            android:text="@{model.pizza.title}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_pizza"
+            tools:text="Mexico" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/container_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_xx_medium"
+            android:background="@drawable/sp_outlined_rectangle"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_screen_title">
+
+            <CheckBox
+                android:id="@+id/icon_minus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:button="@drawable/ic_minus"
+                android:onClick="@{() -> presenter.onMinusClick()}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{model.quantity}"
+                tools:text="1" />
+
+            <CheckBox
+                android:id="@+id/icon_plus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_small"
+                android:button="@drawable/ic_plus"
+                android:onClick="@{() -> presenter.onPlusClick()}" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <TextView
+            android:id="@+id/text_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_xx_medium"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/container_quantity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/container_quantity"
+            app:textPrice="@{model.pizza.price}"
+            tools:text="$17.99" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_xx_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/container_quantity"
+            android:text="pizza, dish of Italian origin consisting of a flattened disk of bread dough topped with some combination of olive oil, oregano, tomato, olives, mozzarella or other cheese, and many other ingredients, baked quickly" />
+
+        <TextView
+            android:id="@+id/text_ingredients"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:text="Ingredients"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_x_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_ingredients"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_ingredients"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_pizza_ingredient" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recyclerview_ingredients"
+            app:selectionRequired="true"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="104dp"
+                android:layout_height="64dp"
+                android:checkable="true"
+                android:checked="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:onClick="@{() -> presenter.onSizeClick(`24`)}"
+                android:text="@string/twenty_four"
+                android:textAlignment="center"
+                android:textColor="@color/cs_text"
+                app:checkedIconEnabled="false"
+                app:chipBackgroundColor="@color/cs_ingredient"
+                app:chipStrokeWidth="0.5dp" />
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="104dp"
+                android:layout_height="64dp"
+                android:layout_marginHorizontal="@dimen/margin_xx_medium"
+                android:checkable="true"
+                android:checked="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{() -> presenter.onSizeClick(`32`)}"
+                android:text="@string/thirty_two"
+                android:textAlignment="center"
+                android:textColor="@color/cs_text"
+                app:checkedIconEnabled="false"
+                app:chipBackgroundColor="@color/cs_ingredient"
+                app:chipStrokeWidth="0.5dp" />
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="104dp"
+                android:layout_height="64dp"
+                android:checkable="true"
+                android:checked="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{() -> presenter.onSizeClick(`48`)}"
+                android:text="@string/forty_four"
+                android:textAlignment="center"
+                android:textColor="@color/cs_text"
+                app:checkedIconEnabled="false"
+                app:chipBackgroundColor="@color/cs_ingredient"
+                app:chipStrokeWidth="0.5dp" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_add_to_cart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/padding_medium"
+            android:text="@string/add_to_cart"
+            android:textAllCaps="false"
+            android:onClick="@{() -> presenter.onAddToCartClick()}"
+            android:textSize="@dimen/text_medium"
+            app:cornerRadius="@dimen/radius_large"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

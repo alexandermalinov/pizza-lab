@@ -8,7 +8,7 @@ import androidx.room.*
 )
 data class PizzaIngredientCrossRef(
     @ColumnInfo(name = "pizza_id")
-    val pizzaId: Long,
+    val pizzaId: String,
     @ColumnInfo(name = "ingredient_id")
     val ingredientId: String
 )

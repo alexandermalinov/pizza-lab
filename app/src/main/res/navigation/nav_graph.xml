@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.example.pizzalab.ui.splash.SplashFragment"
-        android:label="SplashFragment" >
+        android:label="SplashFragment">
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -21,23 +21,33 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.pizzalab.ui.home.HomeFragment"
-        android:label="HomeFragment" >
+        android:label="HomeFragment">
         <action
             android:id="@+id/action_homeFragment_to_createPizzaFragment"
             app:destination="@id/createPizzaFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_pizzaDetailsFragment"
+            app:destination="@id/pizzaDetailsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_pizzaDetailsFragment2"
+            app:destination="@id/pizzaDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.pizzalab.ui.profile.ProfileFragment"
         android:label="ProfileFragment" />
     <fragment
-        android:id="@+id/orderFragment"
-        android:name="com.example.pizzalab.ui.order.OrderFragment"
-        android:label="BagFragment" />
+        android:id="@+id/orderSuccessfulFragment"
+        android:name="com.example.pizzalab.ui.order_successful.OrderSuccessfulFragment"
+        android:label="BagFragment" >
+        <action
+            android:id="@+id/action_orderSuccessfulFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.pizzalab.ui.register.RegisterFragment"
-        android:label="RegisterFragment" >
+        android:label="RegisterFragment">
         <action
             android:id="@+id/action_registerFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
@@ -48,7 +58,7 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.pizzalab.ui.login.LoginFragment"
-        android:label="LoginFragment" >
+        android:label="LoginFragment">
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
@@ -59,5 +69,21 @@
     <fragment
         android:id="@+id/createPizzaFragment"
         android:name="com.example.pizzalab.ui.createpizza.CreatePizzaFragment"
-        android:label="CreatePizzaFragment" />
+        android:label="CreatePizzaFragment">
+        <action
+            android:id="@+id/action_createPizzaFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/purchaseFragment"
+        android:name="com.example.pizzalab.ui.purchase.PurchaseFragment"
+        android:label="PurchaseFragment">
+        <action
+            android:id="@+id/action_purchaseFragment_to_orderFragment"
+            app:destination="@id/orderSuccessfulFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pizzaDetailsFragment"
+        android:name="com.example.pizzalab.ui.pizzadetails.PizzaDetailsFragment"
+        android:label="PizzaDetailsFragment" />
 </navigation>

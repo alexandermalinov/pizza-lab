@@ -1,11 +1,8 @@
 package com.example.pizzalab.data.repository.pizza
 
+import com.example.pizzalab.data.local.entity.Ingredient
+import com.example.pizzalab.data.local.entity.Pizza
 import com.example.pizzalab.data.local.entity.PizzaWithIngredients
-import com.example.pizzalab.data.local.entity.User
-import com.example.pizzalab.utils.responsehandler.DatabaseError
-import com.example.pizzalab.utils.responsehandler.Either
-import com.example.pizzalab.utils.responsehandler.LocalDatabaseError
-import com.example.pizzalab.utils.responsehandler.ResponseResultOk
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -16,8 +13,38 @@ class PizzaRepository @Inject constructor(private val local: PizzaLocalSource) {
      ---------------------------------------------------------------------------------------------*/
     interface LocalSource {
 
-        fun getPizzaWithIngredients(): Flow<PizzaWithIngredients>
+        fun getAllPizzasInTheBag(): Flow<List<Pizza>>
+
+        fun getPizza(pizzaId: String): Flow<PizzaWithIngredients>
+
+        suspend fun savePizza(
+            id: String,
+            title: String,
+            description: String,
+            price: String,
+            size: String,
+            ingredientsIds: List<Ingredient>
+        )
+
+        suspend fun removePizzaFromTheBag(pizzaId: String)
     }
 
-    fun getPizzaWithIngredients(): Flow<PizzaWithIngredients> = local.getPizzaWithIngredients()
+    fun getAllPizzasInBag(): Flow<List<Pizza>> = local.getAllPizzasInTheBag()
+
+    fun getPizza(pizzaId: String): Flow<PizzaWithIngredients> = local.getPizza(pizzaId)
+
+    suspend fun savePizza(
+        id: String,
+        title: String,
+        description: String,
+        price: String,
+        size: String,
+        ingredientsIds: List<Ingredient>
+    ) {
+        local.savePizza(id, title, description, price, size, ingredientsIds)
+    }
+
+    suspend fun removePizzaFromTheBag(pizzaId: String) {
+        local.removePizzaFromTheBag(pizzaId)
+    }
 }

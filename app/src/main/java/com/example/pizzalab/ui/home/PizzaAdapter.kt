@@ -9,20 +9,21 @@ import com.example.pizzalab.databinding.ItemPizzaBinding
 import com.example.pizzalab.utils.DataBoundListAdapter
 import com.example.pizzalab.vo.home.PizzaItemUiModel
 
-class PizzaAdapter : DataBoundListAdapter<PizzaItemUiModel, ItemPizzaBinding>(
-    object : DiffUtil.ItemCallback<PizzaItemUiModel>() {
+class PizzaAdapter(private val presenter: PizzaPresenter) :
+    DataBoundListAdapter<PizzaItemUiModel, ItemPizzaBinding>(
+        object : DiffUtil.ItemCallback<PizzaItemUiModel>() {
 
-        override fun areItemsTheSame(
-            oldItem: PizzaItemUiModel,
-            newItem: PizzaItemUiModel
-        ) = oldItem === newItem
+            override fun areItemsTheSame(
+                oldItem: PizzaItemUiModel,
+                newItem: PizzaItemUiModel
+            ) = oldItem === newItem
 
-        override fun areContentsTheSame(
-            oldItem: PizzaItemUiModel,
-            newItem: PizzaItemUiModel
-        ) = oldItem == newItem
-    }
-) {
+            override fun areContentsTheSame(
+                oldItem: PizzaItemUiModel,
+                newItem: PizzaItemUiModel
+            ) = oldItem == newItem
+        }
+    ) {
 
     /* --------------------------------------------------------------------------------------------
      * Override
@@ -43,5 +44,6 @@ class PizzaAdapter : DataBoundListAdapter<PizzaItemUiModel, ItemPizzaBinding>(
         item: PizzaItemUiModel
     ) {
         binding.model = item
+        binding.presenter = presenter
     }
 }

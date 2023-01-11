@@ -26,3 +26,6 @@ const val USER_SHARED_PREFS_IS_FIRST_TIME_KEY = "user_shared_prefs"
 // User Attributes Keys
 const val USER_EMAIL = "user_email"
 const val USER_PASSWORD = "user_password"
+
+// SavedStateHandle arguments
+const val ARG_PIZZA_ID = "pizza_id"

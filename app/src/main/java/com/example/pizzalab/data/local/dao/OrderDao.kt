@@ -1,17 +1,21 @@
 package com.example.pizzalab.data.local.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
+import com.example.pizzalab.data.local.entity.Order
+import com.example.pizzalab.data.local.entity.Pizza
 import com.example.pizzalab.data.local.entity.User
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface OrderDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveUser(user: User)
+    suspend fun saveOrder(order: Order)
 
-    @Query("SELECT * FROM user WHERE user_id == :userId")
-    suspend fun getUserById(userId: String): User
+    @Query("DELETE FROM order_table WHERE order_id == :orderId")
+    suspend fun removeOrder(orderId: String)
+
+    @Transaction
+    @Query("SELECT * FROM order_table")
+    fun getAllOrders(): Flow<List<Order>>
 }

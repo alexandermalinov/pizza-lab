@@ -84,6 +84,7 @@ fun EditText.setTextChange(callback: TextChangesCallback) {
 }
 
 @BindingAdapter("textPrice")
-fun TextView.setTextPrice(price: String) {
-    text = resources.getString(R.string.pizza_price, price)
+fun TextView.setTextPrice(price: String?) {
+    if (price != null)
+        text = resources.getString(R.string.pizza_price, price)
 }

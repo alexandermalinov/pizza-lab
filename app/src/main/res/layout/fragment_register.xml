@@ -170,7 +170,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_tiny"
                     android:onClick="@{() -> presenter.onLoginClick()}"
-                    android:text="@string/register"
+                    android:text="@string/login"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
 

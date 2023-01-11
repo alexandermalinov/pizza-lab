@@ -9,18 +9,23 @@
             name="model"
             type="com.example.pizzalab.vo.home.PizzaItemUiModel" />
 
+        <variable
+            name="presenter"
+            type="com.example.pizzalab.ui.home.PizzaPresenter" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> presenter.onPizzaClick(model.id)}">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_medium"
             android:layout_marginVertical="@dimen/margin_small"
+            android:layout_marginStart="@dimen/margin_medium"
             android:layout_marginEnd="@dimen/margin_small"
             app:cardCornerRadius="@dimen/radius_medium"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -75,7 +80,7 @@
                     android:textSize="@dimen/text_xx_medium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textview_description"
-                    app:textFormatted="@{model.price}"
+                    app:textPrice="@{model.price}"
                     tools:text="$7,99" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -84,6 +89,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_small"
                     android:layout_marginBottom="@dimen/margin_small"
+                    android:onClick="@{() -> presenter.onAddToBag(model.id)}"
                     android:src="@drawable/ic_shopping_cart_add"
                     app:backgroundTint="@color/white"
                     app:fabSize="mini"
@@ -91,19 +97,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_chainStyle="spread_inside"
                     app:layout_constraintTop_toBottomOf="@+id/textview_price" />
-
-                <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/button_favourite"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/margin_tiny"
-                    android:src="@drawable/ic_like_outlined"
-                    app:backgroundTint="@color/white"
-                    app:fabSize="mini"
-                    app:layout_constraintBottom_toBottomOf="@+id/materialButton"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/materialButton"
-                    app:tint="@color/indian_red" />-->
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

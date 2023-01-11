@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainActivityViewModel by viewModels()
     private lateinit var navigationController: NavController
     private lateinit var dataBinding: ActivityMainBinding
+    private lateinit var badge: BadgeDrawable
 
     /* --------------------------------------------------------------------------------------------
      * Override
@@ -55,15 +56,22 @@ class MainActivity : AppCompatActivity() {
         dataBinding
             .bottomNavigationMenu
             .setupWithNavController(navigationController)
-        viewModel
-            .setBottomNavigationVisibility(
-                navigationController,
-                dataBinding.bottomNavigationMenu
-            )
 
-        val badge: BadgeDrawable = dataBinding.bottomNavigationMenu
-            .getOrCreateBadge(R.id.orderFragment)
-        badge.number = 3
+        viewModel.setBottomNavigationVisibility(
+            navigationController,
+            dataBinding.bottomNavigationMenu
+        )
+
+        initBadgeIcon()
+
+        viewModel.pizzasInBag.observe(this) { numberOfPizzas ->
+            badge.number = numberOfPizzas
+        }
+    }
+
+    private fun initBadgeIcon() {
+        badge = dataBinding.bottomNavigationMenu.getOrCreateBadge(R.id.purchaseFragment)
+        badge.number = 0
         badge.isVisible = true
     }
 }

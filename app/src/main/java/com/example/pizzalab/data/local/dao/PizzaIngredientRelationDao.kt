@@ -9,9 +9,12 @@ import kotlinx.coroutines.flow.Flow
 interface PizzaIngredientRelationDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun savePizzaWithIngredientsRelation(relation: PizzaIngredientCrossRef)
+    suspend fun savePizzaWithIngredientsRelation(relations: List<PizzaIngredientCrossRef>)
+
+    @Query("DELETE FROM pizza_ingredient_relation_table WHERE pizza_id == :pizzaId")
+    suspend fun removePizzaWithIngredientFromBag(pizzaId: String)
 
     @Transaction
-    @Query("SELECT * FROM pizza")
-    fun getPizzaWithIngredients(): Flow<PizzaWithIngredients>
+    @Query("SELECT * FROM pizza_table WHERE pizza_id = :id")
+    fun getPizzaWithIngredients(id: String): Flow<PizzaWithIngredients>
 }

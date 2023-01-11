@@ -2,19 +2,23 @@ package com.example.pizzalab.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.pizzalab.data.local.dao.OrderDao
-import com.example.pizzalab.data.local.dao.PizzaDao
-import com.example.pizzalab.data.local.dao.PizzaIngredientRelationDao
-import com.example.pizzalab.data.local.dao.UserDao
-import com.example.pizzalab.data.local.entity.Order
-import com.example.pizzalab.data.local.entity.PizzaIngredientCrossRef
-import com.example.pizzalab.data.local.entity.User
+import androidx.room.TypeConverters
+import com.example.pizzalab.data.local.dao.*
+import com.example.pizzalab.data.local.entity.*
 
 @Database(
-    entities = [User::class, Order::class, PizzaIngredientCrossRef::class],
+    entities = [
+        User::class,
+        Order::class,
+        Pizza::class,
+        Ingredient::class,
+        PizzaIngredientCrossRef::class,
+        OrderPizzaCrossRef::class
+    ],
     version = 1,
     exportSchema = false
 )
+@TypeConverters(PizzaTypeConverter::class)
 abstract class RoomDatabase : RoomDatabase() {
 
     abstract fun getUserDao(): UserDao
@@ -24,4 +28,8 @@ abstract class RoomDatabase : RoomDatabase() {
     abstract fun getOrderDao(): OrderDao
 
     abstract fun getPizzaIngredientCrossRefDao(): PizzaIngredientRelationDao
+
+    abstract fun getIngredientsDao(): IngredientsDao
+
+    abstract fun getOrderPizzasCrossRefDao(): OrderPizzasRelationDao
 }

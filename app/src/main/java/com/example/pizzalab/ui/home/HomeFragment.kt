@@ -33,7 +33,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     ---------------------------------------------------------------------------------------------*/
     private fun initPizzaRecyclerView() {
         dataBinding.recyclerViewPizzas.apply {
-            adapter = PizzaAdapter()
+            adapter = PizzaAdapter(viewModel)
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         }
     }

@@ -11,7 +11,7 @@
         android:title="@string/order" />
 
     <item
-        android:id="@+id/orderFragment"
+        android:id="@+id/purchaseFragment"
         android:icon="@drawable/sl_bag"
         android:title="@string/order" />
 
