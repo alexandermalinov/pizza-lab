@@ -13,7 +13,7 @@ import com.example.pizzalab.utils.common.EMPTY
 import com.example.pizzalab.vo.createpizza.CreatePizzaUiModel
 import com.example.pizzalab.vo.createpizza.IngredientUiModel
 import com.example.pizzalab.vo.createpizza.PizzaUiModel
-import com.example.pizzalab.vo.createpizza.toIngredients
+import com.example.pizzalab.vo.createpizza.toListOfIngredients
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.util.*
@@ -207,13 +207,10 @@ class CreatePizzaViewModel @Inject constructor(
         }
     }
 
-    override fun onSizeClick(isChecked: Boolean, size: String) {
-        if (isChecked) {
-            _pizzaUiState.value = _pizzaUiState.value?.copy(size = size)
-            addOrRemovePrice(true, SIZE_PRICE)
-        } else {
-            addOrRemovePrice(false, SIZE_PRICE)
-        }
+    override fun onSizeClick(size: String) {
+        _pizzaUiState.value = _pizzaUiState.value?.copy(size = size)
+        addOrRemovePrice(false, SIZE_PRICE)
+        addOrRemovePrice(true, SIZE_PRICE)
     }
 
     override fun onPurchaseClick() {
@@ -225,7 +222,8 @@ class CreatePizzaViewModel @Inject constructor(
                     description = EMPTY,
                     price = price,
                     size = size,
-                    ingredientsIds = ingredients.toIngredients()
+                    ingredientsIds = ingredients.toListOfIngredients(),
+                    quantity = quantity
                 )
             }
             _navigationLiveData.value =

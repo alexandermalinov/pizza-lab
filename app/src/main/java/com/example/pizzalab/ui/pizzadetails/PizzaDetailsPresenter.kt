@@ -6,7 +6,7 @@ interface PizzaDetailsPresenter {
 
     fun onAddToCartClick()
 
-    fun onSizeClick(size: String)
+    fun onSizeClick(selectedSize: String)
 
     fun onMinusClick()
 

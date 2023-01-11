@@ -28,4 +28,4 @@ const val USER_EMAIL = "user_email"
 const val USER_PASSWORD = "user_password"
 
 // SavedStateHandle arguments
-const val ARG_PIZZA_ID = "pizza_id"
+const val ARG_PIZZA = "pizza"

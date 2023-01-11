@@ -23,7 +23,8 @@ class PizzaRepository @Inject constructor(private val local: PizzaLocalSource) {
             description: String,
             price: String,
             size: String,
-            ingredientsIds: List<Ingredient>
+            ingredientsIds: List<Ingredient>,
+            quantity: String
         )
 
         suspend fun removePizzaFromTheBag(pizzaId: String)
@@ -39,9 +40,10 @@ class PizzaRepository @Inject constructor(private val local: PizzaLocalSource) {
         description: String,
         price: String,
         size: String,
-        ingredientsIds: List<Ingredient>
+        ingredientsIds: List<Ingredient>,
+        quantity: String
     ) {
-        local.savePizza(id, title, description, price, size, ingredientsIds)
+        local.savePizza(id, title, description, price, size, ingredientsIds, quantity)
     }
 
     suspend fun removePizzaFromTheBag(pizzaId: String) {

@@ -8,15 +8,18 @@ import com.example.pizzalab.data.local.entity.Ingredient
 import com.example.pizzalab.ui.ingredient.IngredientType
 import com.example.pizzalab.utils.common.EMPTY
 import com.example.pizzalab.utils.common.ZERO
-import java.util.UUID
+import kotlinx.serialization.Serializable
+import java.util.*
 
+
+@Serializable
 data class IngredientUiModel(
     val id: String = EMPTY,
     @DrawableRes
     val image: Int = ZERO,
     val name: String = EMPTY,
     val type: IngredientType = IngredientType.MEAT
-) : BaseObservable() {
+) : BaseObservable(), java.io.Serializable {
 
     @get:Bindable
     var isSelected: Boolean = false
@@ -26,7 +29,7 @@ data class IngredientUiModel(
         }
 }
 
-fun List<IngredientUiModel>.toIngredients() = map {
+fun List<IngredientUiModel>.toListOfIngredients() = map {
     Ingredient(
         id = UUID.randomUUID().toString(),
         image = it.image,

@@ -16,6 +16,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
 @HiltViewModel
 class PurchaseViewModel @Inject constructor(
@@ -37,7 +38,10 @@ class PurchaseViewModel @Inject constructor(
         val allPizzas = pizzas.toListOfPizzaUiModels()
         PurchaseUiModel(
             discountAmount = "0",
-            totalPrice = allPizzas.sumOf { pizza -> pizza.price.toDouble() }.toString()
+            totalPrice = allPizzas
+                .sumOf { pizza ->
+                    pizza.price.toDouble().roundToInt() * pizza.quantity.toInt()
+                }.toString()
         ).apply {
             this.pizzas = allPizzas
         }

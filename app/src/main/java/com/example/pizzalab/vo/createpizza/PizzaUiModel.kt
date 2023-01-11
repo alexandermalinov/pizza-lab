@@ -9,7 +9,8 @@ data class PizzaUiModel(
     val size: String = EMPTY,
     val ingredients: List<IngredientUiModel> = listOf(),
     val title: String = "Your Own Made",
-    val description: String = ingredients.joinToString("•")
+    val description: String = ingredients.joinToString("•"),
+    val quantity: String = "1"
 )
 
 fun List<PizzaUiModel>.toListOfPizza() = map { pizzaUiModel ->
@@ -17,8 +18,9 @@ fun List<PizzaUiModel>.toListOfPizza() = map { pizzaUiModel ->
         id = pizzaUiModel.id,
         price = pizzaUiModel.price,
         size = pizzaUiModel.size,
-        ingredients = pizzaUiModel.ingredients.toIngredients(),
+        ingredients = pizzaUiModel.ingredients.toListOfIngredients(),
         title = pizzaUiModel.title,
-        description = pizzaUiModel.description
+        description = pizzaUiModel.description,
+        quantity = pizzaUiModel.quantity
     )
 }

@@ -1,23 +1,28 @@
 package com.example.pizzalab.ui.pizzadetails
 
-import androidx.lifecycle.*
-import com.example.pizzalab.data.local.entity.toListOfIngredientUiModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.viewModelScope
 import com.example.pizzalab.data.repository.pizza.PizzaRepository
 import com.example.pizzalab.navigation.PopBackStack
 import com.example.pizzalab.ui.base.BaseViewModel
 import com.example.pizzalab.ui.ingredient.IngredientPresenter
-import com.example.pizzalab.utils.common.ARG_PIZZA_ID
+import com.example.pizzalab.utils.common.ARG_PIZZA
 import com.example.pizzalab.utils.common.EMPTY
 import com.example.pizzalab.vo.createpizza.PizzaUiModel
+import com.example.pizzalab.vo.createpizza.toListOfIngredients
+import com.example.pizzalab.vo.home.PizzaItemUiModel
 import com.example.pizzalab.vo.pizzadetails.PizzaDetailsUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
 class PizzaDetailsViewModel @Inject constructor(
-    private val savedStateHandle: SavedStateHandle,
-    pizzaRepository: PizzaRepository
+    savedStateHandle: SavedStateHandle,
+    private val pizzaRepository: PizzaRepository
 ) : BaseViewModel(),
     PizzaDetailsPresenter, IngredientPresenter {
 
@@ -27,20 +32,18 @@ class PizzaDetailsViewModel @Inject constructor(
     val uiState: LiveData<PizzaDetailsUiModel>
         get() = _uiState
 
-    private val pizzaId = savedStateHandle[ARG_PIZZA_ID] ?: EMPTY
-    private val _uiState = Transformations.map(
-        pizzaRepository
-            .getPizza("df37f4ce-9b35-4214-8fe0-9990d119da23")
-            .asLiveData(viewModelScope.coroutineContext + Dispatchers.Default)
-    ) {
-        PizzaDetailsUiModel(
+    private val _uiState = MutableLiveData<PizzaDetailsUiModel>()
+    private val currentPizza = savedStateHandle.get<PizzaItemUiModel>(ARG_PIZZA)
+
+    init {
+        _uiState.value = PizzaDetailsUiModel(
             pizza = PizzaUiModel(
-                it.pizza.id,
-                it.pizza.price,
-                it.pizza.size,
-                it.ingredients.toListOfIngredientUiModel(),
-                it.pizza.title,
-                it.pizza.description
+                currentPizza?.id ?: EMPTY,
+                currentPizza?.price ?: EMPTY,
+                currentPizza?.size ?: EMPTY,
+                currentPizza?.ingredients ?: emptyList(),
+                currentPizza?.title ?: EMPTY,
+                currentPizza?.description ?: EMPTY
             )
         )
     }
@@ -53,18 +56,40 @@ class PizzaDetailsViewModel @Inject constructor(
     }
 
     override fun onAddToCartClick() {
-        // TODO("Not yet implemented")
+        viewModelScope.launch {
+            _uiState.value?.apply {
+                pizzaRepository.savePizza(
+                    id = UUID.randomUUID().toString(),
+                    title = pizza.title,
+                    description = pizza.description,
+                    price = pizza.price,
+                    size = pizza.size,
+                    ingredientsIds = pizza.ingredients.toListOfIngredients(),
+                    quantity = pizza.quantity
+                )
+            }
+            _navigationLiveData.value = PopBackStack
+        }
     }
 
-    override fun onSizeClick(size: String) {
-        //_uiState.value?.pizza
+    override fun onSizeClick(selectedSize: String) {
+        _uiState.value?.pizza?.let {
+            _uiState.value = _uiState.value?.copy(
+                pizza = it.copy(size = selectedSize)
+            )
+        }
     }
 
     override fun onMinusClick() {
-        // TODO("Not yet implemented")
+        _uiState.value?.apply {
+            _uiState.value =
+                copy(pizza = pizza.copy(quantity = pizza.quantity.toInt().minus(1).toString()))
+        }
     }
 
     override fun onPlusClick() {
-        // TODO("Not yet implemented")
+        _uiState.value?.apply {
+            _uiState.value = copy(pizza = pizza.copy(quantity = pizza.quantity.toInt().plus(1).toString()))
+        }
     }
 }

@@ -21,7 +21,9 @@ data class Pizza(
     @ColumnInfo(name = "title")
     val title: String = EMPTY,
     @ColumnInfo(name = "description")
-    val description: String = EMPTY
+    val description: String = EMPTY,
+    @ColumnInfo(name = "quantity")
+    val quantity: String = EMPTY
 )
 
 fun List<Pizza>.toListOfPizzaUiModels() = map { pizza ->
@@ -32,6 +34,7 @@ fun List<Pizza>.toListOfPizzaUiModels() = map { pizza ->
         size = pizza.size,
         ingredients = ingredients,
         title = pizza.title.ifBlank { "Your Own Made" },
-        description = pizza.description.ifBlank { ingredients.joinToString(" • ") { it.name } }
+        description = pizza.description.ifBlank { ingredients.joinToString(" • ") { it.name } },
+        quantity = pizza.quantity
     )
 }

@@ -9,9 +9,9 @@ import com.example.pizzalab.data.repository.pizza.PizzaRepository
 import com.example.pizzalab.navigation.NavigationGraph
 import com.example.pizzalab.ui.base.BaseViewModel
 import com.example.pizzalab.ui.ingredient.IngredientType
-import com.example.pizzalab.utils.common.ARG_PIZZA_ID
+import com.example.pizzalab.utils.common.ARG_PIZZA
 import com.example.pizzalab.vo.createpizza.IngredientUiModel
-import com.example.pizzalab.vo.createpizza.toIngredients
+import com.example.pizzalab.vo.createpizza.toListOfIngredients
 import com.example.pizzalab.vo.home.HomeUiModel
 import com.example.pizzalab.vo.home.PizzaItemUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -112,21 +112,26 @@ class HomeViewModel @Inject constructor(private val pizzaRepository: PizzaReposi
             _uiState.value?.pizzas?.apply {
                 val selectedPizza = first { it.id == pizzaId }
                 pizzaRepository.savePizza(
-                    id = selectedPizza.id,
+                    id = UUID.randomUUID().toString(),
                     title = selectedPizza.title,
                     description = selectedPizza.description,
                     price = selectedPizza.price,
                     size = selectedPizza.size,
-                    ingredientsIds = selectedPizza.ingredients.toIngredients()
+                    ingredientsIds = selectedPizza.ingredients.toListOfIngredients(),
+                    quantity = selectedPizza.quantity
                 )
             }
         }
     }
 
     override fun onPizzaClick(pizzaId: String) {
-        _navigationLiveData.value = NavigationGraph(
-            R.id.action_homeFragment_to_pizzaDetailsFragment,
-            bundleOf(ARG_PIZZA_ID to pizzaId)
-        )
+        _uiState.value?.pizzas
+            ?.first { it.id == pizzaId }
+            ?.let { selectedPizza ->
+                _navigationLiveData.value = NavigationGraph(
+                    R.id.action_homeFragment_to_pizzaDetailsFragment,
+                    bundleOf(ARG_PIZZA to selectedPizza)
+                )
+            }
     }
 }
