@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.example.pizzalab.vo.register.RegisterUiModel" />
+
+        <variable
+            name="presenter"
+            type="com.example.pizzalab.ui.register.RegisterPresenter" />
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/padding_medium">
+
+            <TextView
+                android:id="@+id/text_welcome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginHorizontal="@dimen/margin_xx_medium"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:fontFamily="@font/core_sans_regular"
+                android:gravity="start"
+                android:text="@string/register"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_xx_medium"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edittext_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text_welcome"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginHorizontal="@dimen/margin_xx_medium"
+                android:layout_marginTop="@dimen/margin_large"
+                android:hint="@string/enter_email"
+                app:boxBackgroundColor="@color/white"
+                app:endIconDrawable="@{model.emailEndIcon}"
+                app:endIconMode="custom"
+                app:endIconTint="@color/apple"
+                app:errorEnabled="@{model.emailErrorEnabled}"
+                app:inputError="@{model.emailError}">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:text="@={model.email}"
+                    app:textChanges="@{(flow) -> presenter.onEmailTextChanged(flow)}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edittext_phone_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edittext_email"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginHorizontal="@dimen/margin_xx_medium"
+                android:hint="@string/enter_phone"
+                app:boxBackgroundColor="@color/white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:text="@={model.phoneNumber}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edittext_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edittext_phone_number"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginHorizontal="@dimen/margin_xx_medium"
+                android:hint="@string/enter_address"
+                app:boxBackgroundColor="@color/white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@={model.address}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edittext_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edittext_address"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginHorizontal="@dimen/margin_xx_medium"
+                android:layout_marginTop="@dimen/margin_small"
+                android:hint="@string/enter_password"
+                app:boxBackgroundColor="@color/white"
+                app:errorEnabled="@{model.passwordErrorEnabled}"
+                app:errorIconDrawable="@null"
+                app:inputError="@{model.passwordError}"
+                app:passwordToggleEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:text="@={model.password}"
+                    app:textChanges="@{(flow) -> presenter.onPasswordTextChanged(flow)}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edittext_confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edittext_password"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginHorizontal="@dimen/margin_xx_medium"
+                android:layout_marginTop="@dimen/margin_small"
+                android:hint="@string/confirm_password"
+                app:boxBackgroundColor="@color/white"
+                app:errorEnabled="@{model.confirmPasswordErrorEnabled}"
+                app:errorIconDrawable="@null"
+                app:inputError="@{model.confirmPasswordError}"
+                app:passwordToggleEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:text="@={model.confirmPassword}"
+                    app:textChanges="@{(flow) -> presenter.onConfirmPasswordTextChanged(flow)}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/container_already_have_account"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="@dimen/margin_xx_medium"
+                android:layout_marginTop="@dimen/margin_xx_medium"
+                android:layout_marginEnd="@dimen/margin_xx_medium"
+                android:enabled="@{model.continueEnabled}"
+                android:onClick="@{() -> presenter.onContinueClick()}"
+                android:paddingVertical="@dimen/padding_x_small"
+                android:text="@string/continue_text"
+                app:cornerRadius="@dimen/radius_large" />
+
+            <ProgressBar
+                android:id="@+id/loading_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginBottom="@dimen/margin_xx_medium"
+                app:visibleGone="@{model.loading}" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/container_already_have_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_already_have_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> presenter.onLoginClick()}"
+                    android:text="@string/already_have_account"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/text_sign_up"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_tiny"
+                    android:onClick="@{() -> presenter.onLoginClick()}"
+                    android:text="@string/login"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</layout>

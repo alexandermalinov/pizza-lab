@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.example.pizzalab.vo.ordersuccessful.OrderSuccessfulUiModel" />
+
+        <variable
+            name="presenter"
+            type="com.example.pizzalab.ui.order_successful.OrderSuccessfulPresenter" />
+
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="@dimen/margin_medium">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="250dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="@dimen/margin_x_large"
+            android:src="@drawable/ic_order_successful"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_order_placed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_x_medium"
+            android:fontFamily="@font/rozanova_semi_bold"
+            android:text="@string/thank_you"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_xx_medium"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_xx_medium"
+            android:layout_marginTop="@dimen/margin_x_medium"
+            app:cardCornerRadius="@dimen/radius_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_order_placed">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/padding_x_medium">
+
+                <TextView
+                    android:id="@+id/text_order_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_x_large"
+                    android:text="Address"
+                    android:textAlignment="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_order_address_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_x_large"
+                    android:text="@{model.address}"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_order_address"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/text_order_address"
+                    tools:text="Sofia Center 2012" />
+
+                <TextView
+                    android:id="@+id/text_order_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_x_large"
+                    android:layout_marginTop="@dimen/margin_xx_medium"
+                    android:text="Delivery time"
+                    android:textAlignment="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_order_address" />
+
+                <TextView
+                    android:id="@+id/text_order_date_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_x_large"
+                    android:text="40 minutes"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_order_date"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/text_order_date" />
+
+                <TextView
+                    android:id="@+id/text_order_payment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_x_large"
+                    android:layout_marginTop="@dimen/margin_xx_medium"
+                    android:text="@string/payment"
+                    android:textAlignment="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_order_date" />
+
+                <TextView
+                    android:id="@+id/text_order_payment_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cash"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_order_payment"
+                    app:layout_constraintEnd_toEndOf="@+id/text_order_date_value"
+                    app:layout_constraintTop_toTopOf="@+id/text_order_payment" />
+
+                <TextView
+                    android:id="@+id/text_order_total_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_x_large"
+                    android:layout_marginTop="@dimen/margin_xx_medium"
+                    android:text="Total price"
+                    android:textAlignment="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_order_payment" />
+
+                <TextView
+                    android:id="@+id/text_order_total_price_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:textPrice="@{model.totalPrice}"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_order_total_price"
+                    app:layout_constraintEnd_toEndOf="@+id/text_order_payment_value"
+                    app:layout_constraintTop_toTopOf="@+id/text_order_total_price"
+                    tools:text="$24" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_go_to_home"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_x_large"
+            android:drawableEnd="@drawable/ic_arrow_right"
+            android:drawableTint="@color/white"
+            android:fontFamily="@font/core_sans_regular"
+            android:onClick="@{() -> presenter.backToHome()}"
+            android:paddingHorizontal="@dimen/padding_x_large"
+            android:text="@string/back_to_home"
+            android:textAllCaps="false"
+            android:textSize="@dimen/text_medium"
+            app:cornerRadius="@dimen/radius_medium"
+            app:layout_constraintEnd_toEndOf="@+id/card_view_info"
+            app:layout_constraintStart_toStartOf="@+id/card_view_info"
+            app:layout_constraintTop_toBottomOf="@+id/card_view_info" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
