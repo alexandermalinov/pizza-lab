@@ -29,8 +29,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
                 android:layout_marginHorizontal="@dimen/margin_xx_medium"
                 android:layout_marginTop="@dimen/margin_medium"
                 android:fontFamily="@font/core_sans_regular"
@@ -67,10 +67,47 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edittext_password"
+                android:id="@+id/edittext_phone_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/edittext_email"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginHorizontal="@dimen/margin_xx_medium"
+                android:hint="@string/enter_phone"
+                app:boxBackgroundColor="@color/white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:text="@={model.phoneNumber}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edittext_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edittext_phone_number"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginHorizontal="@dimen/margin_xx_medium"
+                android:hint="@string/enter_address"
+                app:boxBackgroundColor="@color/white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@={model.address}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edittext_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edittext_address"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginHorizontal="@dimen/margin_xx_medium"
@@ -119,9 +156,9 @@
             <com.google.android.material.button.MaterialButton
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_above="@+id/container_already_have_account"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_above="@+id/container_already_have_account"
                 android:layout_gravity="bottom"
                 android:layout_marginStart="@dimen/margin_xx_medium"
                 android:layout_marginTop="@dimen/margin_xx_medium"
@@ -147,21 +184,20 @@
                 android:id="@+id/container_already_have_account"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/margin_medium"
-                android:layout_marginBottom="@dimen/margin_xx_medium"
-                android:orientation="horizontal"
-                android:gravity="center_horizontal">
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/text_already_have_account"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/already_have_account"
                     android:onClick="@{() -> presenter.onLoginClick()}"
+                    android:text="@string/already_have_account"
                     android:textStyle="bold" />
 
                 <TextView

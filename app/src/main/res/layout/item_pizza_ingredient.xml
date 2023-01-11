@@ -25,19 +25,19 @@
         android:orientation="vertical"
         android:layout_marginEnd="@dimen/margin_small"
         android:background="@drawable/sp_outlined_rectangle"
-        android:padding="@dimen/padding_x_small">
+        android:padding="@dimen/padding_medium">
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="48dp"
-            android:layout_height="30dp"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
             app:defaultGlideRes="@{R.drawable.ic_basil}"
             app:glideRes="@{model.image}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_tomato" />
+            tools:src="@drawable/ic_pepper" />
 
         <ImageView
             android:id="@+id/imageView2"

@@ -23,7 +23,17 @@ class OrderSuccessfulFragment : BaseFragment<FragmentOrderSuccessfulBinding>() {
         super.onViewCreated(view, savedInstanceState)
         dataBinding.presenter = viewModel
         observeNavigation(viewModel.navigationLiveData)
+        observeLiveData()
     }
 
     override fun getLayoutId(): Int = R.layout.fragment_order_successful
+
+    /* --------------------------------------------------------------------------------------------
+     * Private
+    ---------------------------------------------------------------------------------------------*/
+    private fun observeLiveData() {
+        viewModel.uiState.observe(viewLifecycleOwner) { uiModel ->
+            dataBinding.model = uiModel
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.pizzalab.ui.purchase
 
+import androidx.core.os.bundleOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.asLiveData
@@ -10,6 +11,7 @@ import com.example.pizzalab.data.repository.order.OrderRepository
 import com.example.pizzalab.data.repository.pizza.PizzaRepository
 import com.example.pizzalab.navigation.NavigationGraph
 import com.example.pizzalab.ui.base.BaseViewModel
+import com.example.pizzalab.utils.common.ARG_TOTAL_PRICE
 import com.example.pizzalab.vo.createpizza.toListOfPizza
 import com.example.pizzalab.vo.purchase.PurchaseUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -70,8 +72,10 @@ class PurchaseViewModel @Inject constructor(
                         pizzas = pizzas.toListOfPizza()
                     )
                     pizzas.forEach { pizzaRepository.removePizzaFromTheBag(it.id) }
-                    _navigationLiveData.value =
-                        NavigationGraph(R.id.action_purchaseFragment_to_orderFragment)
+                    _navigationLiveData.value = NavigationGraph(
+                        R.id.action_purchaseFragment_to_orderFragment,
+                        bundleOf(ARG_TOTAL_PRICE to _pizzasInBag.value?.totalPrice)
+                    )
                 }
             }
         }

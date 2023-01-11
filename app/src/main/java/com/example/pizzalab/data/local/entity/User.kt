@@ -12,5 +12,9 @@ data class User(
     @ColumnInfo(name = "user_email")
     val userEmail: String,
     @ColumnInfo(name = "user_password")
-    val userPassword: String
+    val userPassword: String,
+    @ColumnInfo(name = "phone_number")
+    val phoneNumber: String,
+    @ColumnInfo(name = "address")
+    val address: String
 )

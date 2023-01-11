@@ -38,6 +38,8 @@ class UserLocalSource @Inject constructor(
         }
     }
 
+    override suspend fun getCurrentUser() = userDao.getUserByEmail()
+
     override suspend fun setIsSignedIn(isSignedIn: Boolean) {
         SharedPrefProvider.setIsUserSignedIn(context, isSignedIn)
     }

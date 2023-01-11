@@ -22,6 +22,7 @@ const val SPLASH_SCREEN_DELAY = 1500L
 const val USER_SHARED_PREFS_KEY = "user_shared_prefs"
 const val USER_SHARED_PREFS_IS_SIGNED_IN_KEY = "user_shared_prefs"
 const val USER_SHARED_PREFS_IS_FIRST_TIME_KEY = "user_shared_prefs"
+const val USER_SHARED_PREFS_EMAIL = "user_shared_prefs_email"
 
 // User Attributes Keys
 const val USER_EMAIL = "user_email"
@@ -29,3 +30,4 @@ const val USER_PASSWORD = "user_password"
 
 // SavedStateHandle arguments
 const val ARG_PIZZA = "pizza"
+const val ARG_TOTAL_PRICE = "total_price"

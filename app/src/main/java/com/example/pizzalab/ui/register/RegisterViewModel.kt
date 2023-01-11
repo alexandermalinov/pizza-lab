@@ -68,7 +68,12 @@ class RegisterViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.value?.apply {
                 isLoading = true
-                val model = RegisterUiModel(email = email, password = password).toUser()
+                val model = RegisterUiModel(
+                    email = email,
+                    phoneNumber = phoneNumber,
+                    address = address,
+                    password = password
+                ).toUser()
 
                 userRepository.registerUser(model) { either ->
                     either.foldSuspend({ error ->

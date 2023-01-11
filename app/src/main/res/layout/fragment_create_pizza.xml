@@ -31,6 +31,7 @@
             android:layout_height="0dp"
             android:fillViewport="true"
             android:paddingTop="@dimen/margin_medium"
+            android:layout_marginBottom="@dimen/margin_small"
             app:layout_constraintBottom_toTopOf="@+id/button_add_to_cart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -47,13 +48,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/margin_medium"
-                    android:layout_marginTop="@dimen/margin_medium"
-                    android:text="@string/welcome_to_lab"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:text="@string/create_pizza"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_xx_medium"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@+id/image_pizza" />
 
                 <ImageView
                     android:id="@+id/image_pizza"
@@ -62,7 +63,7 @@
                     android:src="@drawable/pizza_1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/chipGroup"
@@ -73,7 +74,7 @@
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/image_pizza"
+                    app:layout_constraintTop_toBottomOf="@+id/textView3"
                     app:selectionRequired="true"
                     app:singleSelection="true">
 
@@ -263,6 +264,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_medium"
             android:layout_marginEnd="@dimen/margin_xx_medium"
+            android:layout_marginBottom="@dimen/margin_small"
             android:onClick="@{() -> presenter.onPurchaseClick()}"
             android:paddingVertical="@dimen/padding_small"
             android:text="@string/add_to_cart"
@@ -278,6 +280,7 @@
             android:layout_width="112dp"
             android:layout_height="40dp"
             android:layout_marginEnd="@dimen/margin_medium"
+            android:layout_marginBottom="@dimen/margin_small"
             android:background="@drawable/sp_outlined_rectangle"
             android:gravity="center"
             android:textColor="@color/black"
