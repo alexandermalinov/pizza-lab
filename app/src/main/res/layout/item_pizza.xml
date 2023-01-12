@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="@dimen/padding_medium"
-                android:paddingBottom="@dimen/padding_medium">
+                android:paddingVertical="@dimen/padding_medium">
 
                 <ImageView
                     android:id="@+id/image_pizza"
