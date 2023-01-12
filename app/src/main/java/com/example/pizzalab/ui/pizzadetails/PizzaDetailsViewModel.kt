@@ -10,6 +10,7 @@ import com.example.pizzalab.ui.base.BaseViewModel
 import com.example.pizzalab.ui.ingredient.IngredientPresenter
 import com.example.pizzalab.utils.common.ARG_PIZZA
 import com.example.pizzalab.utils.common.EMPTY
+import com.example.pizzalab.utils.common.INVALID_RES
 import com.example.pizzalab.vo.createpizza.PizzaUiModel
 import com.example.pizzalab.vo.createpizza.toListOfIngredients
 import com.example.pizzalab.vo.home.PizzaItemUiModel
@@ -43,7 +44,9 @@ class PizzaDetailsViewModel @Inject constructor(
                 currentPizza?.size ?: EMPTY,
                 currentPizza?.ingredients ?: emptyList(),
                 currentPizza?.title ?: EMPTY,
-                currentPizza?.description ?: EMPTY
+                currentPizza?.description ?: EMPTY,
+                "1",
+                currentPizza?.image ?: INVALID_RES
             )
         )
     }
@@ -65,7 +68,8 @@ class PizzaDetailsViewModel @Inject constructor(
                     price = pizza.price,
                     size = pizza.size,
                     ingredientsIds = pizza.ingredients.toListOfIngredients(),
-                    quantity = pizza.quantity
+                    quantity = pizza.quantity,
+                    image = pizza.imageRes
                 )
             }
             _navigationLiveData.value = PopBackStack

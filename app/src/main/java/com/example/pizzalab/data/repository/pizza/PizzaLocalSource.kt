@@ -31,7 +31,8 @@ class PizzaLocalSource @Inject constructor(
         price: String,
         size: String,
         ingredientsIds: List<Ingredient>,
-        quantity: String
+        quantity: String,
+        image: Int
     ) {
         ingredientsDao.insert(ingredientsIds)
         savePizzaWithIngredients(id, ingredientsIds.map { it.id })
@@ -43,7 +44,8 @@ class PizzaLocalSource @Inject constructor(
                 ingredients = ingredientsIds,
                 title = title,
                 description = description,
-                quantity
+                quantity,
+                image
             )
         )
     }

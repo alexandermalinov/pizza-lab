@@ -88,3 +88,8 @@ fun TextView.setTextPrice(price: String?) {
     if (price != null)
         text = resources.getString(R.string.pizza_price, price)
 }
+
+@BindingAdapter("imageRes")
+fun ImageView.setImageRes(imageRes: Int?) {
+    if (imageRes != null) setImageResource(imageRes)
+}
