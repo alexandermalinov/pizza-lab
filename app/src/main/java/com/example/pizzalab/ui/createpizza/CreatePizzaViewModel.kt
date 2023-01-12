@@ -223,7 +223,8 @@ class CreatePizzaViewModel @Inject constructor(
                     price = price,
                     size = size,
                     ingredientsIds = ingredients.toListOfIngredients(),
-                    quantity = quantity
+                    quantity = quantity,
+                    image = R.drawable.ic_pizza_create
                 )
             }
             _navigationLiveData.value =

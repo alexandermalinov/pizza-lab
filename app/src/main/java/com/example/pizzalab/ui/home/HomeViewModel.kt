@@ -61,6 +61,20 @@ class HomeViewModel @Inject constructor(private val pizzaRepository: PizzaReposi
         )
         val listOfPizza = listOf(
             PizzaItemUiModel(
+                image = R.drawable.ic_pizza_8,
+                title = "Italia",
+                description = "Mixed with tomatoes",
+                price = "12.99",
+                ingredients = ingredients
+            ),
+            PizzaItemUiModel(
+                image = R.drawable.ic_pizza_7,
+                title = "Master Burger",
+                description = "Mixed with burger sauce",
+                price = "10.99",
+                ingredients = ingredients
+            ),
+            PizzaItemUiModel(
                 image = R.drawable.pizza_1,
                 title = "Clasico",
                 description = "Mixed with cheese",
@@ -68,30 +82,16 @@ class HomeViewModel @Inject constructor(private val pizzaRepository: PizzaReposi
                 ingredients = ingredients
             ),
             PizzaItemUiModel(
-                image = R.drawable.pizza_1,
-                title = "Mexico",
-                description = "Mixed with chilli",
-                price = "10.99",
-                ingredients = ingredients
-            ),
-            PizzaItemUiModel(
-                image = R.drawable.pizza_1,
-                title = "Italia",
-                description = "Mixed with tomatoes",
-                price = "7.99",
-                ingredients = ingredients
-            ),
-            PizzaItemUiModel(
-                image = R.drawable.pizza_1,
+                image = R.drawable.ic_pizza_5,
                 title = "Pepperoni",
                 description = "Mixed with chorizo",
                 price = "8.99",
                 ingredients = ingredients
             ),
             PizzaItemUiModel(
-                image = R.drawable.pizza_1,
-                title = "Master Burger",
-                description = "Mixed with burger sauce",
+                image = R.drawable.ic_pizza_6,
+                title = "Mexico",
+                description = "Mixed with chilli",
                 price = "6.99",
                 ingredients = ingredients
             )
@@ -118,7 +118,8 @@ class HomeViewModel @Inject constructor(private val pizzaRepository: PizzaReposi
                     price = selectedPizza.price,
                     size = selectedPizza.size,
                     ingredientsIds = selectedPizza.ingredients.toListOfIngredients(),
-                    quantity = selectedPizza.quantity
+                    quantity = selectedPizza.quantity,
+                    image = selectedPizza.image
                 )
             }
         }

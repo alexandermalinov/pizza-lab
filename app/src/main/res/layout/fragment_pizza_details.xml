@@ -34,10 +34,11 @@
             android:id="@+id/image_pizza"
             android:layout_width="match_parent"
             android:layout_height="172dp"
-            android:src="@drawable/pizza_1"
+            app:imageRes="@{model.pizza.imageRes}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/icon_navigate_back" />
+            app:layout_constraintTop_toBottomOf="@+id/icon_navigate_back"
+            tools:src="@drawable/ic_pizza_7"/>
 
         <TextView
             android:id="@+id/text_screen_title"

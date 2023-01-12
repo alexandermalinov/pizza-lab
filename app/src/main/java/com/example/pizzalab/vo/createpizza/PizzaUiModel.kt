@@ -2,6 +2,7 @@ package com.example.pizzalab.vo.createpizza
 
 import com.example.pizzalab.data.local.entity.Pizza
 import com.example.pizzalab.utils.common.EMPTY
+import com.example.pizzalab.utils.common.INVALID_RES
 
 data class PizzaUiModel(
     val id: String = EMPTY,
@@ -10,7 +11,8 @@ data class PizzaUiModel(
     val ingredients: List<IngredientUiModel> = listOf(),
     val title: String = "Your Own Made",
     val description: String = ingredients.joinToString("•"),
-    val quantity: String = "1"
+    val quantity: String = "1",
+    val imageRes: Int = INVALID_RES
 )
 
 fun List<PizzaUiModel>.toListOfPizza() = map { pizzaUiModel ->
@@ -21,6 +23,7 @@ fun List<PizzaUiModel>.toListOfPizza() = map { pizzaUiModel ->
         ingredients = pizzaUiModel.ingredients.toListOfIngredients(),
         title = pizzaUiModel.title,
         description = pizzaUiModel.description,
-        quantity = pizzaUiModel.quantity
+        quantity = pizzaUiModel.quantity,
+        image = pizzaUiModel.imageRes
     )
 }

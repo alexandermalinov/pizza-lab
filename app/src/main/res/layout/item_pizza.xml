@@ -43,11 +43,11 @@
                     android:id="@+id/image_pizza"
                     android:layout_width="200dp"
                     android:layout_height="172dp"
-                    android:src="@drawable/pizza_1"
+                    app:imageRes="@{model.image}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:src="@drawable/pizza_1" />
+                    tools:src="@drawable/ic_pizza_8" />
 
                 <TextView
                     android:id="@+id/textview_title"

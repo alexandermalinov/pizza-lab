@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.pizzalab.utils.common.EMPTY
+import com.example.pizzalab.utils.common.INVALID_RES
 import com.example.pizzalab.vo.createpizza.PizzaUiModel
 
 @kotlinx.serialization.Serializable
@@ -23,7 +24,9 @@ data class Pizza(
     @ColumnInfo(name = "description")
     val description: String = EMPTY,
     @ColumnInfo(name = "quantity")
-    val quantity: String = EMPTY
+    val quantity: String = EMPTY,
+    @ColumnInfo(name = "image")
+    val image: Int = INVALID_RES
 )
 
 fun List<Pizza>.toListOfPizzaUiModels() = map { pizza ->
@@ -35,6 +38,7 @@ fun List<Pizza>.toListOfPizzaUiModels() = map { pizza ->
         ingredients = ingredients,
         title = pizza.title.ifBlank { "Your Own Made" },
         description = pizza.description.ifBlank { ingredients.joinToString(" • ") { it.name } },
-        quantity = pizza.quantity
+        quantity = pizza.quantity,
+        imageRes = pizza.image
     )
 }
